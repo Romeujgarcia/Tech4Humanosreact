@@ -8,30 +8,30 @@ function Weader() {
   const [search, setSearch] = useState("itajuba");
   
   
-
-
-
   useEffect(() => {
     async function getData() {
-      const res = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=b14d34b29decb3a8a377a3444a4093b6`
-      );
-      //console.log(res.data);
-      setCity(res.data);
-    }
-    
-      getData();
+      
+      const res = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=b14d34b29decb3a8a377a3444a4093b6`);
 
+      console.log(res.data);
+      setCity(res.data);
+      const json = await JSON.stringify({cidade: res.data.name});
+       await axios.post('http://localhost:8000/buscar', json, {
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
+      
+     
+    }
+  
+      getData();
+      
   }, [search]);
 
 
-  useEffect(()=>{
-    async function getResul () {
-      const resultado = await axios.post('http://localhost:8000/buscar');
-      console.log(resultado);
-    }
-    getResul();
-  },[search])
+
 
 
   return (
