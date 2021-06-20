@@ -10,10 +10,9 @@ function Weader() {
   
   useEffect(() => {
     async function getData() {
-      
       const res = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=b14d34b29decb3a8a377a3444a4093b6`);
 
-      console.log(res.data);
+     // console.log(res.data);
       setCity(res.data);
       const json = await JSON.stringify({cidade: res.data.name});
        await axios.post('http://localhost:8000/buscar', json, {
@@ -22,8 +21,6 @@ function Weader() {
           'Content-Type': 'application/json'
         }
       });
-      
-     
     }
   
       getData();
@@ -46,7 +43,6 @@ function Weader() {
 
         />
 
-       
       </div>
       
       

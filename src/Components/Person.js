@@ -9,7 +9,7 @@ export default class Person extends React.Component {
   };
   componentDidMount() {
     axios.get(`http://localhost:8000/consultar`).then((res) => {
-      console.log(res);
+      //console.log(res);
       this.setState({ persons: res.data[0] });
       this.setState({ ultima: res.data[1] });
       //console.log(res.data[0])
